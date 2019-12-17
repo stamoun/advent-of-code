@@ -1,0 +1,18 @@
+{
+  "name": "advent-of-code",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:02": "jest 2019/02",
+    "test:03": "jest 2019/03"
+  },
+  "author": "Nicolas St-Amour",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.7.2",
+    "fs": "0.0.1-security",
+    "jest": "^24.9.0",
+    "prettier": "^1.19.1"
+  }
+}
