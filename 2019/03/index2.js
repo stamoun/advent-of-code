@@ -15,9 +15,15 @@ function compute(wirePaths) {
   const wire1Positions = getPoints(wires[0]);
   const wire2Positions = getPoints(wires[1]);
 
-  let intersections = wire1Positions.filter(pos => wire2Positions.some(pos2 => pos.x === pos2.x && pos.y === pos2.y));
+  let intersections = wire1Positions.filter(pos =>
+    wire2Positions.some(pos2 => pos.x === pos2.x && pos.y === pos2.y)
+  );
 
-  const stepsPerIntersection = getStepsPerIntersections(intersections, wire1Positions, wire2Positions);
+  const stepsPerIntersection = getStepsPerIntersections(
+    intersections,
+    wire1Positions,
+    wire2Positions
+  );
 
   const minimumSteps = getLeastSteps(stepsPerIntersection);
 
@@ -35,7 +41,6 @@ function getPoints(wirePath) {
 
     for (let i = 0; i < distance; ++i) {
       const point = {
-        ...previousPosition,
         x: previousPosition.x + operations[direction].x,
         y: previousPosition.y + operations[direction].y
       };
@@ -48,7 +53,11 @@ function getPoints(wirePath) {
   return positions;
 }
 
-function getStepsPerIntersections(intersections, wire1Positions, wire2Positions) {
+function getStepsPerIntersections(
+  intersections,
+  wire1Positions,
+  wire2Positions
+) {
   let stepsPerIntersections = [];
 
   intersections.map(intersection => {
@@ -56,7 +65,10 @@ function getStepsPerIntersections(intersections, wire1Positions, wire2Positions)
       const wire1Steps = getStepsPerIntersection(intersection, wire1Positions);
       const wire2Steps = getStepsPerIntersection(intersection, wire2Positions);
 
-      stepsPerIntersections.push({ intersection: intersection, steps: wire1Steps + wire2Steps });
+      stepsPerIntersections.push({
+        intersection: intersection,
+        steps: wire1Steps + wire2Steps
+      });
     }
   });
 

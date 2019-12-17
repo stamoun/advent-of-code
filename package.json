@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
     "test:02": "jest 2019/02",
     "test:03": "jest 2019/03"
   },

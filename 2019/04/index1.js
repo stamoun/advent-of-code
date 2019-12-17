@@ -3,7 +3,9 @@
 function isValid(password) {
   const passwordChars = password.toString().split('');
 
-  return has2AdjacentNumbers(passwordChars) && isIncreasingOrEqual(passwordChars);
+  return (
+    has2AdjacentNumbers(passwordChars) && isIncreasingOrEqual(passwordChars)
+  );
 }
 
 function isIncreasingOrEqual(password) {

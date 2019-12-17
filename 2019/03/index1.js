@@ -14,7 +14,9 @@ function compute(wirePaths) {
   const wire1Positions = getPoints(wires[0]);
   const wire2Positions = getPoints(wires[1]);
 
-  let intersections = wire1Positions.filter(pos => wire2Positions.some(pos2 => pos.x === pos2.x && pos.y === pos2.y));
+  let intersections = wire1Positions.filter(pos =>
+    wire2Positions.some(pos2 => pos.x === pos2.x && pos.y === pos2.y)
+  );
 
   const distance = computeShortestDistance(intersections);
 
@@ -32,7 +34,6 @@ function getPoints(wirePath) {
 
     for (let i = 0; i < distance; ++i) {
       const point = {
-        ...previousPosition,
         x: previousPosition.x + operations[direction].x,
         y: previousPosition.y + operations[direction].y
       };
@@ -54,7 +55,11 @@ function computeShortestDistance(intersections) {
 
   intersections.map(intersection => {
     const currentDistance = getDistance(intersection);
-    if (currentDistance !== null && currentDistance !== 0 && currentDistance < shortestDistance) {
+    if (
+      currentDistance !== null &&
+      currentDistance !== 0 &&
+      currentDistance < shortestDistance
+    ) {
       shortestDistance = currentDistance;
     }
   });
