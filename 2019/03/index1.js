@@ -11,12 +11,16 @@ const operations = {
 
 function compute(wirePaths) {
   const wires = wirePaths.split('\n');
+
   const wire1Positions = getPoints(wires[0]);
   const wire2Positions = getPoints(wires[1]);
 
-  let intersections = wire1Positions.filter(pos =>
-    wire2Positions.some(pos2 => pos.x === pos2.x && pos.y === pos2.y)
-  );
+  let intersections = [];
+  for (const [key, value] of Object.entries(wire1Positions)) {
+    if (key !== '0, 0' && !!wire2Positions[key]) {
+      intersections.push(value);
+    }
+  }
 
   const distance = computeShortestDistance(intersections);
 
@@ -25,12 +29,12 @@ function compute(wirePaths) {
 
 function getPoints(wirePath) {
   const movementData = wirePath.split(',');
-  let positions = [{ x: 0, y: 0 }];
+  let positions = {};
+  let previousPosition = { x: 0, y: 0 };
 
   movementData.map(movement => {
     const direction = movement.substr(0, 1);
     const distance = parseInt(movement.substr(1), 10);
-    let previousPosition = positions[positions.length - 1];
 
     for (let i = 0; i < distance; ++i) {
       const point = {
@@ -38,7 +42,7 @@ function getPoints(wirePath) {
         y: previousPosition.y + operations[direction].y
       };
 
-      positions.push(point);
+      positions[`${point.x}, ${point.y}`] = point;
       previousPosition = point;
     }
   });
